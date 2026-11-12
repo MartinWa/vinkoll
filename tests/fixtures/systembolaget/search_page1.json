@@ -1,0 +1,8 @@
+{
+  "metadata": {"docCount": 4, "nextPage": 2, "previousPage": -1, "totalPages": 2},
+  "products": [
+    {"productId": "900001", "productNumber": "9900101", "productNumberShort": "99001", "productNameBold": "Synthetic Estate", "productNameThin": "Red blend", "producerName": "Synthetic Producer", "categoryLevel1": "Vin", "categoryLevel2": "Rött vin", "volume": 750.0, "vintage": "2021", "grapes": ["Corvina", "Rondinella"], "price": 129.5},
+    {"productId": "900002", "productNumber": "9900106", "productNumberShort": "99001", "productNameBold": "Synthetic Estate", "producerName": "Synthetic Producer", "categoryLevel1": "Vin", "categoryLevel2": "Rött vin", "volume": 1500.0, "vintage": null, "grapes": [], "price": 0},
+    {"productId": "900003", "productNumber": "99001201", "productNumberShort": "990012", "productNameBold": "Synthetic Ale", "categoryLevel1": "Öl", "volume": 330, "vintage": null, "grapes": [], "price": 25.0}
+  ]
+}

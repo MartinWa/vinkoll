@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block content %}<a class="back" href="{{ back_url }}">← {% translate 'Cellar' %}</a>
+<section class="detail-header"><p class="eyebrow">{{ wine.get_wine_type_display }}</p><h1>{{ wine.name }}</h1><p>{{ wine.producer }} · {{ wine.volume_ml }} ml</p>
+<p>{{ wine.country }}{% if wine.region %} · {{ wine.region }}{% endif %}</p><p>{{ wine.grapes|join:', ' }}</p>
+{% if wine.notes %}<div class="wine-notes">{{ wine.notes|linebreaks }}</div>{% endif %}
+{% if wine.product_url %}<a href="{{ wine.product_url }}" rel="noopener noreferrer">Systembolaget ↗</a>{% endif %}
+<p class="muted">{{ total }} {% translate 'available bottles across all locations' %}</p></section>
+<h2>{% translate 'Available bottles' %}</h2>
+<div class="bottle-groups">{% for group in groups %}<section class="bottle-group">
+<h3>{{ group.count }} × {{ group.bottle.vintage_label }} · {{ group.bottle.location_label }}</h3>
+<p>{% translate 'Price paid' %}: {% if group.bottle.purchase_price != None %}{{ group.bottle.purchase_price }} kr{% else %}{% translate 'Unknown' %}{% endif %}</p>
+{% for bottle in group.bottles %}<a class="button secondary" href="{% url 'bottle_edit' bottle.pk %}?location={{ scope }}">{% translate 'Edit bottle' %} #{{ bottle.pk }}</a>{% endfor %}
+</section>{% empty %}<p>{% translate 'No available bottles in this scope.' %}</p>{% endfor %}</div>
+{% endblock %}

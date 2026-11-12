@@ -1,0 +1,15 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block title %}{{ title }} · Vinkoll{% endblock %}
+{% block content %}<section class="form-panel">
+<a class="back" href="{{ back_url }}">← {% translate 'Back' %}</a>
+<h1>{{ title }}</h1>{% if subtitle %}<p>{{ subtitle }}</p>{% endif %}
+{% if no_wines %}
+<p>{% translate 'Create a wine profile in Wines first, then add its bottles here.' %}</p>
+<a class="button" href="{% url 'wine_create' %}">{% translate 'Add wine' %}</a>
+{% else %}
+<form method="post" data-preserve-form>{% csrf_token %}{{ form.as_p }}
+<p class="draft-status muted" role="status" {% if not stale_draft %}hidden{% endif %}>
+{% if stale_draft %}{% translate 'Your unsaved input is based on older bottle details.' %}{% else %}{% translate 'Your unsaved input has been restored. Review it before saving.' %}{% endif %}
+<a href="{{ request.get_full_path }}" data-discard-draft>{% translate 'Discard unsaved input and reload' %}</a></p>
+<button type="submit">{% translate 'Save' %}</button> <a class="button secondary" href="{{ back_url }}">{% translate 'Cancel' %}</a>
+</form>{% endif %}</section>{% endblock %}

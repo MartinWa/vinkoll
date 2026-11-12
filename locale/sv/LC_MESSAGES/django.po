@@ -1,0 +1,383 @@
+msgid ""
+msgstr ""
+"Language: sv\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "Producer"
+msgstr "Producent"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Country"
+msgstr "Land"
+
+msgid "Region"
+msgstr "Region"
+
+msgid "Red"
+msgstr "Rött"
+
+msgid "White"
+msgstr "Vitt"
+
+msgid "Rosé"
+msgstr "Rosé"
+
+msgid "Sparkling"
+msgstr "Mousserande"
+
+msgid "Dessert wine"
+msgstr "Dessertvin"
+
+msgid "Fortified wine"
+msgstr "Starkvin"
+
+msgid "Other"
+msgstr "Annat"
+
+msgid "Bottle size (ml)"
+msgstr "Flaskstorlek (ml)"
+
+msgid "Full Systembolaget article number"
+msgstr "Fullständigt artikelnummer hos Systembolaget"
+
+msgid "Use digits only."
+msgstr "Använd bara siffror."
+
+msgid "General notes"
+msgstr "Allmänna anteckningar"
+
+msgid "Year"
+msgstr "Årtal"
+
+msgid "Unknown"
+msgstr "Okänd"
+
+msgid "Non-vintage"
+msgstr "Utan årgång"
+
+msgid "Available"
+msgstr "Tillgänglig"
+
+msgid "Consumed"
+msgstr "Drucken"
+
+msgid "Removed"
+msgstr "Borttagen"
+
+msgid "Location"
+msgstr "Plats"
+
+msgid "Vintage"
+msgstr "Årgång"
+
+msgid "Vintage year"
+msgstr "Årgångens årtal"
+
+msgid "Price paid per bottle (SEK)"
+msgstr "Inköpspris per flaska (kr)"
+
+msgid "Unassigned"
+msgstr "Utan plats"
+
+msgid "Added bottles"
+msgstr "Lade till flaskor"
+
+msgid "Corrected bottle"
+msgstr "Rättade flaska"
+
+msgid "Moved bottle"
+msgstr "Flyttade flaska"
+
+msgid "Gift"
+msgstr "Gåva"
+
+msgid "Loss"
+msgstr "Förlust"
+
+msgid "Inventory adjustment"
+msgstr "Inventeringsjustering"
+
+msgid "Choose which bottle group to consume from."
+msgstr "Välj vilken grupp du vill ta en flaska från."
+
+msgid "This operation token has already been used for another change."
+msgstr "Den här åtgärden har redan använts för en annan ändring."
+
+msgid "Sign in to change the cellar."
+msgstr "Logga in för att ändra källaren."
+
+msgid "Choose an active location."
+msgstr "Välj en aktiv plats."
+
+msgid "Enter between 1 and 1000 bottles per addition."
+msgstr "Ange mellan 1 och 1000 flaskor per tillägg."
+
+msgid "Restore this wine in Wines before adding bottles."
+msgstr "Återställ vinet under Viner innan du lägger till flaskor."
+
+msgid "That bottle is no longer available. Nothing was changed."
+msgstr "Flaskan är inte längre tillgänglig. Ingen ändring gjordes."
+
+msgid "This bottle has changed. Reload its details before editing."
+msgstr "Flaskan har ändrats. Ladda om uppgifterna innan du redigerar."
+
+msgid "Grapes (comma-separated)"
+msgstr "Druvor (separera med kommatecken)"
+
+msgid "Leave blank if unknown. Zero is a valid price."
+msgstr "Lämna tomt om priset är okänt. Noll är ett giltigt pris."
+
+msgid "Enter a vintage year."
+msgstr "Ange årgångens årtal."
+
+msgid "Only enter a year when Year is selected."
+msgstr "Ange bara årtal när Årtal är valt."
+
+msgid "Wine"
+msgstr "Vin"
+
+msgid "Number of bottles"
+msgstr "Antal flaskor"
+
+msgid "The selected record no longer exists. Review your choices."
+msgstr "Den valda posten finns inte längre. Kontrollera dina val."
+
+msgid "The cellar is busy. Your input is preserved; try saving again."
+msgstr "Källaren är upptagen. Dina uppgifter finns kvar; försök spara igen."
+
+msgid "Wine saved. Add bottles from Cellar when you are ready."
+msgstr "Vinet sparades. Lägg till flaskor från Källare när du är redo."
+
+msgid "Wine saved."
+msgstr "Vinet sparades."
+
+msgid "Add wine"
+msgstr "Lägg till vin"
+
+msgid "Edit wine"
+msgstr "Redigera vin"
+
+msgid "Catalogue updated."
+msgstr "Vinkatalogen uppdaterades."
+
+msgid "Bottles added."
+msgstr "Flaskorna lades till."
+
+msgid "Add bottles"
+msgstr "Lägg till flaskor"
+
+msgid "Bottle saved."
+msgstr "Flaskan sparades."
+
+msgid "Edit bottle"
+msgstr "Redigera flaska"
+
+msgid "One bottle consumed."
+msgstr "En flaska markerades som drucken."
+
+msgid "Location saved."
+msgstr "Platsen sparades."
+
+msgid "Rename location"
+msgstr "Byt namn på plats"
+
+msgid "Main navigation"
+msgstr "Huvudmeny"
+
+msgid "Cellar"
+msgstr "Källare"
+
+msgid "Wines"
+msgstr "Viner"
+
+msgid "Timeline"
+msgstr "Historik"
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "Sign in"
+msgstr "Logga in"
+
+msgid "Your wines, together in one cellar."
+msgstr "Dina viner, samlade i en källare."
+
+msgid "Too many sign-in attempts. Please try again in 15 minutes."
+msgstr "För många inloggningsförsök. Försök igen om 15 minuter."
+
+msgid "Change password"
+msgstr "Byt lösenord"
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Please sign in again"
+msgstr "Logga in igen"
+
+msgid "Your session expired. Your input is kept in this tab. Sign in to review and retry."
+msgstr "Din session har gått ut. Uppgifterna finns kvar i den här fliken. Logga in för att granska och försöka igen."
+
+msgid "Unsaved input"
+msgstr "Osparade uppgifter"
+
+msgid "Back"
+msgstr "Tillbaka"
+
+msgid "Create a wine profile in Wines first, then add its bottles here."
+msgstr "Skapa först ett vin under Viner och lägg sedan till flaskorna här."
+
+msgid "Your unsaved input has been restored. Review it before saving."
+msgstr "Dina osparade uppgifter har återställts. Kontrollera dem innan du sparar."
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Unrated"
+msgstr "Ej betygsatt"
+
+msgid "Price unknown"
+msgstr "Pris okänt"
+
+msgid "wines"
+msgstr "viner"
+
+msgid "available bottles"
+msgstr "tillgängliga flaskor"
+
+msgid "All locations"
+msgstr "Alla platser"
+
+msgid "Filter"
+msgstr "Filtrera"
+
+msgid "bottles"
+msgstr "flaskor"
+
+msgid "Consume"
+msgstr "Drick"
+
+msgid "Room for something good"
+msgstr "Plats för något gott"
+
+msgid "No bottles at this location. Add bottles from your wine catalogue."
+msgstr "Inga flaskor på den här platsen. Lägg till flaskor från din vinkatalog."
+
+msgid "Open Wines"
+msgstr "Öppna Viner"
+
+msgid "Your catalogue"
+msgstr "Din vinkatalog"
+
+msgid "Wine profiles live here. Add the bottles you own from Cellar."
+msgstr "Här finns dina viner. Lägg till flaskorna du har från Källare."
+
+msgid "Active"
+msgstr "Aktiva"
+
+msgid "Archived"
+msgstr "Arkiverade"
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Restore"
+msgstr "Återställ"
+
+msgid "Delete / archive"
+msgstr "Ta bort / arkivera"
+
+msgid "Start your wine collection"
+msgstr "Börja din vinsamling"
+
+msgid "Save a wine profile before adding bottles to Cellar."
+msgstr "Spara ett vin innan du lägger till flaskor i Källare."
+
+msgid "available bottles across all locations"
+msgstr "tillgängliga flaskor på alla platser"
+
+msgid "Available bottles"
+msgstr "Tillgängliga flaskor"
+
+msgid "Price paid"
+msgstr "Inköpspris"
+
+msgid "No available bottles in this scope."
+msgstr "Inga tillgängliga flaskor i det här urvalet."
+
+msgid "Consume one bottle"
+msgstr "Drick en flaska"
+
+msgid "Restore this wine to the active catalogue?"
+msgstr "Återställ vinet till den aktiva vinkatalogen?"
+
+msgid "This wine has bottle history. Archive its profile? Available bottles remain in Cellar."
+msgstr "Vinet har flaskhistorik. Arkivera vinet? Tillgängliga flaskor finns kvar i Källare."
+
+msgid "Permanently delete this unused wine profile?"
+msgstr "Ta bort det här oanvända vinet permanent?"
+
+msgid "Confirm"
+msgstr "Bekräfta"
+
+msgid "Locations"
+msgstr "Platser"
+
+msgid "Bottles without a location are Unassigned."
+msgstr "Flaskor utan vald plats visas som Utan plats."
+
+msgid "Add location"
+msgstr "Lägg till plats"
+
+msgid "Account"
+msgstr "Konto"
+
+msgid "Sign out"
+msgstr "Logga ut"
+
+msgid "Rename"
+msgstr "Byt namn"
+
+msgid "The latest 100 inventory operations."
+msgstr "De senaste 100 lageråtgärderna."
+
+msgid "recorded changes"
+msgstr "registrerade ändringar"
+
+msgid "Bottle"
+msgstr "Flaska"
+
+msgid "%(count)s wine"
+msgid_plural "%(count)s wines"
+msgstr[0] "%(count)s vin"
+msgstr[1] "%(count)s viner"
+
+msgid "%(count)s available bottle"
+msgid_plural "%(count)s available bottles"
+msgstr[0] "%(count)s tillgänglig flaska"
+msgstr[1] "%(count)s tillgängliga flaskor"
+
+msgid "%(count)s bottle"
+msgid_plural "%(count)s bottles"
+msgstr[0] "%(count)s flaska"
+msgstr[1] "%(count)s flaskor"
+
+msgid "Your cellar history starts when you add bottles."
+msgstr "Din källarhistorik börjar när du lägger till flaskor."
+
+msgid "Your unsaved input is based on older bottle details."
+msgstr "Dina osparade uppgifter bygger på äldre flaskinformation."
+
+msgid "Discard unsaved input and reload"
+msgstr "Kasta osparade uppgifter och ladda om"
+
+msgid "This wine has bottle or review history. Archive its profile? Available bottles remain in Cellar."
+msgstr "Vinet har flaskhistorik eller recensioner. Arkivera profilen? Tillgängliga flaskor visas fortfarande i Källare."
+
+msgid "Choose a wine action."
+msgstr "Välj en åtgärd för vinet."

@@ -1,0 +1,30 @@
+# Django will call Systembolaget directly; cellar startup has no provider dependency.
+# Optional helper diagnostics: compose.systembolaget.example.yaml (standalone).
+services:
+  vinkoll:
+    image: "${VINKOLL_IMAGE:?Set a tested image tag or digest}"
+    build:
+      context: .
+      target: production
+    env_file: "${VINKOLL_ENV_FILE:-.env}"
+    environment:
+      DJANGO_SETTINGS_MODULE: vinkoll.settings.production
+      VINKOLL_DATA_DIR: /data
+    user: "${APP_UID:?Set a non-root UID}:${APP_GID:?Set its GID}"
+    volumes:
+      - "${APP_DATA_PATH:?Set a host-local data directory}:/data"
+    networks: [proxy]
+    restart: unless-stopped
+    read_only: true
+    tmpfs: ["/tmp:size=67108864,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+networks:
+  proxy:
+    external: true
+    name: "${PROXY_NETWORK:?Set the existing Caddy network}"

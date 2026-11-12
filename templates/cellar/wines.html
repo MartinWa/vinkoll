@@ -1,0 +1,9 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block content %}<div class="page-heading"><div><p class="eyebrow">{% translate 'Your catalogue' %}</p><h1>{% translate 'Wines' %}</h1>
+<p class="muted">{% translate 'Wine profiles live here. Add the bottles you own from Cellar.' %}</p></div></div>
+<div class="tabs"><a href="{% url 'wines' %}" {% if not archived %}aria-current="page"{% endif %}>{% translate 'Active' %}</a><a href="?archived=1" {% if archived %}aria-current="page"{% endif %}>{% translate 'Archived' %}</a></div>
+<div class="card-grid">{% for wine in wines %}<article class="wine-card">{% include 'cellar/card_identity.html' %}
+<div class="card-actions"><a class="button secondary" href="{% url 'wine_edit' wine.pk %}">{% translate 'Edit' %}</a><a class="button secondary" href="{% url 'wine_retire' wine.pk %}">{% if archived %}{% translate 'Restore' %}{% else %}{% translate 'Delete / archive' %}{% endif %}</a></div>
+</article>{% empty %}<section class="empty-state"><h2>{% translate 'Start your wine collection' %}</h2><p>{% translate 'Save a wine profile before adding bottles to Cellar.' %}</p></section>{% endfor %}</div>
+<a class="floating-add" href="{% url 'wine_create' %}"><span aria-hidden="true">+</span> {% translate 'Add wine' %}</a>
+{% endblock %}

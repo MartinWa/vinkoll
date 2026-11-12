@@ -1,0 +1,22 @@
+name: vinkoll-development
+services:
+  vinkoll:
+    build:
+      context: .
+      target: development
+    image: vinkoll:development
+    init: true
+    ports:
+      - "127.0.0.1:${VINKOLL_DEV_PORT:-8003}:8000"
+    volumes:
+      - .:/app
+      - development-data:/data
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+volumes:
+  development-data:

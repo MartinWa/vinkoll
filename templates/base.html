@@ -1,0 +1,33 @@
+{% load i18n static %}
+<!doctype html>
+<html lang="{{ request.LANGUAGE_CODE|default:'sv' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Vinkoll{% endblock %}</title>
+  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'app.css' %}">
+  <script src="{% static 'app.js' %}" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{% url 'cellar' %}"><span class="brand-mark" aria-hidden="true">V</span>Vinkoll</a>
+    {% if user.is_authenticated %}
+    <nav aria-label="{% translate 'Main navigation' %}">
+      <a href="{% url 'cellar' %}" {% if request.resolver_match.url_name == 'cellar' %}aria-current="page"{% endif %}>{% translate 'Cellar' %}</a>
+      <a href="{% url 'wines' %}" {% if request.resolver_match.url_name == 'wines' %}aria-current="page"{% endif %}>{% translate 'Wines' %}</a>
+      <a href="{% url 'timeline' %}" {% if request.resolver_match.url_name == 'timeline' %}aria-current="page"{% endif %}>{% translate 'Timeline' %}</a>
+      <a href="{% url 'settings' %}" {% if request.resolver_match.url_name == 'settings' %}aria-current="page"{% endif %}>{% translate 'Settings' %}</a>
+    </nav>
+    {% endif %}
+  </header>
+  <main id="main">
+    {% for message in messages %}
+      {% if 'completed-draft' in message.tags %}<span hidden data-completed-draft="{{ message }}"></span>
+      {% elif 'completed-operation' in message.tags %}<span hidden data-completed-operation="{{ message }}"></span>
+      {% else %}<p class="notice {{ message.tags }}" role="status">{{ message }}</p>{% endif %}
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

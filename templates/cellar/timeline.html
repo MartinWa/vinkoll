@@ -1,0 +1,10 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block content %}<h1>{% translate 'Timeline' %}</h1><p class="muted">{% translate 'The latest 100 inventory operations.' %}</p>
+<div class="timeline">{% for operation in operations %}<article class="timeline-entry">
+<p class="eyebrow">{{ operation.created_at|date:'Y-m-d H:i' }} · {{ operation.actor.username }}</p>
+{% with event=operation.events.first %}<h2>{{ event.get_reason_display }} · {{ event.current.wine_name }}</h2>{% endwith %}
+<details><summary>{{ operation.events.count }} {% translate 'recorded changes' %}</summary>
+{% for event in operation.events.all %}<p>{{ event.get_reason_display }} · {% translate 'Bottle' %} #{{ event.bottle_id }}</p>
+<p class="muted">{% if event.previous %}{{ event.previous.vintage_year|default:event.previous.vintage_kind }} · {{ event.previous.location_name|default:'—' }} → {% endif %}{{ event.current.vintage_year|default:event.current.vintage_kind }} · {{ event.current.location_name|default:'—' }}</p>{% endfor %}
+</details></article>{% empty %}<section class="empty-state"><p>{% translate 'Your cellar history starts when you add bottles.' %}</p></section>{% endfor %}</div>
+{% endblock %}

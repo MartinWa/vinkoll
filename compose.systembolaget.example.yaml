@@ -1,0 +1,30 @@
+# Standalone, optional Stage 0 helper test. The application uses direct backend adapters.
+# Start explicitly: docker compose -f compose.systembolaget.example.yaml --profile systembolaget-test up -d
+# This helper is not required by compose.yaml or compose.development.yaml.
+name: vinkoll-systembolaget-test
+services:
+  systembolaget:
+    profiles: [systembolaget-test]
+    # Released 5.0.0 image, pinned to the digest verified during Stage 0.
+    image: ghcr.io/alexgustafsson/systembolaget-api@sha256:ca13ad6d54b0e4fee4a3ce1a941d42d54c15d3afd236c79d9fa0327ca85baaba
+    platform: linux/amd64
+    entrypoint: ["/usr/local/bin/proxy"]
+    user: "65534:65534"
+    # A localhost-only listener for the opt-in diagnostic script, never a public service.
+    ports:
+      - "127.0.0.1:${SYSTEMBOLAGET_TEST_PORT:-8004}:8080"
+    networks: [systembolaget-test]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    # Leave startup failures visible during diagnostics rather than restart indefinitely.
+    restart: "no"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+networks:
+  systembolaget-test:
+    # Normal outbound access is needed to discover the website key and request stock.
+    driver: bridge

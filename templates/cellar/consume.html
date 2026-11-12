@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block content %}<section class="form-panel"><a class="back" href="{{ back_url }}">← {% translate 'Cellar' %}</a>
+<h1>{% translate 'Consume' %} · {{ wine.name }}</h1>
+{{ form.non_field_errors }}{% for field in form %}{{ field.errors }}{% endfor %}
+{% if groups %}<p>{% translate 'Choose which bottle group to consume from.' %}</p>
+<form method="post" data-preserve-form>{% csrf_token %}{{ form.token }}
+{% for group in groups %}<label class="group-choice"><input type="radio" name="bottle_id" value="{{ group.bottle.pk }}" required>
+<span>{{ group.count }} × {{ group.bottle.vintage_label }} · {{ group.bottle.location_label }} · {% if group.bottle.purchase_price != None %}{{ group.bottle.purchase_price }} kr{% else %}{% translate 'Price unknown' %}{% endif %}</span></label>{% endfor %}
+<button type="submit">{% translate 'Consume one bottle' %}</button></form>
+{% else %}<a class="button secondary" href="{{ back_url }}">{% translate 'Back' %}</a>{% endif %}
+</section>{% endblock %}

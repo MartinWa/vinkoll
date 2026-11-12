@@ -1,0 +1,21 @@
+name: Checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build development image
+        run: docker build --target development -t vinkoll:ci-dev .
+      - name: Lint, migrations and database tests
+        run: |
+          docker run --rm --tmpfs /data:uid=1000,gid=1000 vinkoll:ci-dev python -m ruff check .
+          docker run --rm --tmpfs /data:uid=1000,gid=1000 vinkoll:ci-dev python -m ruff format --check .
+          docker run --rm --tmpfs /data:uid=1000,gid=1000 vinkoll:ci-dev python manage.py makemigrations --check --dry-run
+          docker run --rm --tmpfs /data:uid=1000,gid=1000 vinkoll:ci-dev python -m pytest
+      - name: Build production image
+        run: docker build --target production -t vinkoll:ci .
+      - name: Production HTTP and persistence smoke test
+        run: python tools/smoke.py vinkoll:ci

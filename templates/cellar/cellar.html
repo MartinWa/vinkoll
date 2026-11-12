@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Vinkoll</p><h1>{% translate 'Cellar' %}</h1>
+<p class="muted">{% blocktranslate count count=wines|length %}{{ count }} wine{% plural %}{{ count }} wines{% endblocktranslate %} · {% blocktranslate count count=bottle_count %}{{ count }} available bottle{% plural %}{{ count }} available bottles{% endblocktranslate %}</p></div></div>
+{% if show_locations %}<form method="get" class="filter-form"><label for="location">{% translate 'Location' %}</label>
+<select id="location" name="location"><option value="all">{% translate 'All locations' %}</option><option value="unassigned" {% if scope == 'unassigned' %}selected{% endif %}>{% translate 'Unassigned' %}</option>
+{% for location in locations %}<option value="{{ location.pk }}" {% if scope == location.pk|stringformat:'s' %}selected{% endif %}>{{ location.name }}</option>{% endfor %}</select><button class="secondary" type="submit">{% translate 'Filter' %}</button></form>{% endif %}
+<div class="card-grid">{% for wine in wines %}<article class="wine-card">
+{% include 'cellar/card_identity.html' %}
+<div class="card-actions"><a class="button secondary" href="{% url 'wine_detail' wine.pk %}?location={{ scope }}">{% blocktranslate count count=wine.available_count %}{{ count }} bottle{% plural %}{{ count }} bottles{% endblocktranslate %} ↗</a>
+<form method="post" action="{% url 'consume' wine.pk %}?location={{ scope }}" data-preserve-form>{% csrf_token %}<input type="hidden" name="token" value="{{ wine.operation_token }}"><button type="submit">{% translate 'Consume' %}</button></form></div>
+</article>{% empty %}<section class="empty-state"><h2>{% translate 'Room for something good' %}</h2><p>{% translate 'No bottles at this location. Add bottles from your wine catalogue.' %}</p><a href="{% url 'wines' %}">{% translate 'Open Wines' %} →</a></section>{% endfor %}</div>
+<a class="floating-add" href="{% url 'bottle_add' %}?location={{ scope }}"><span aria-hidden="true">+</span> {% translate 'Add bottles' %}</a>
+{% endblock %}
