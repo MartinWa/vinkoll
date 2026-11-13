@@ -1,14 +1,19 @@
 {% extends 'base.html' %}{% load i18n %}
-{% block content %}<a class="back" href="{{ back_url }}">← {% translate 'Cellar' %}</a>
+{% block content %}<a class="back" href="{{ back_url }}">← {% if from_wines %}{% translate 'Wines' %}{% else %}{% translate 'Cellar' %}{% endif %}</a>
+{% if wine.image_id %}<img class="detail-photo" src="{% url 'wine_image' wine.image_id 'display' %}" alt="{{ wine.name }}" data-wine-photo>{% endif %}
 <section class="detail-header"><p class="eyebrow">{{ wine.get_wine_type_display }}</p><h1>{{ wine.name }}</h1><p>{{ wine.producer }} · {{ wine.volume_ml }} ml</p>
 <p>{{ wine.country }}{% if wine.region %} · {{ wine.region }}{% endif %}</p><p>{{ wine.grapes|join:', ' }}</p>
+{% if wine.archived %}<p class="notice">{% translate 'Archived' %}</p>{% endif %}
 {% if wine.notes %}<div class="wine-notes">{{ wine.notes|linebreaks }}</div>{% endif %}
 {% if wine.product_url %}<a href="{{ wine.product_url }}" rel="noopener noreferrer">Systembolaget ↗</a>{% endif %}
+<p>{% translate 'Retail price' %}: {% if wine.retail_price != None %}{{ wine.retail_price }} kr · {{ wine.retail_price_source }}{% if wine.retail_price_retrieved_at %} · {{ wine.retail_price_retrieved_at|date:'Y-m-d H:i' }}{% endif %}{% else %}{% translate 'Price unknown' %}{% endif %}</p>
 <p class="muted">{{ total }} {% translate 'available bottles across all locations' %}</p></section>
 <h2>{% translate 'Available bottles' %}</h2>
 <div class="bottle-groups">{% for group in groups %}<section class="bottle-group">
 <h3>{{ group.count }} × {{ group.bottle.vintage_label }} · {{ group.bottle.location_label }}</h3>
 <p>{% translate 'Price paid' %}: {% if group.bottle.purchase_price != None %}{{ group.bottle.purchase_price }} kr{% else %}{% translate 'Unknown' %}{% endif %}</p>
-{% for bottle in group.bottles %}<a class="button secondary" href="{% url 'bottle_edit' bottle.pk %}?location={{ scope }}">{% translate 'Edit bottle' %} #{{ bottle.pk }}</a>{% endfor %}
+{% for bottle in group.bottles %}<div class="bottle-actions"><a class="button secondary" href="{% url 'bottle_edit' bottle.pk %}{{ context_suffix }}">{% translate 'Edit bottle' %} #{{ bottle.pk }}</a><a class="button secondary" href="{% url 'bottle_remove' bottle.pk %}{{ context_suffix }}">{% translate 'Remove bottle' %} #{{ bottle.pk }}</a></div>{% endfor %}
 </section>{% empty %}<p>{% translate 'No available bottles in this scope.' %}</p>{% endfor %}</div>
+<section class="reviews"><h2>{% translate 'Reviews' %}</h2><a class="button" href="{% url 'review_add' wine.pk %}{{ context_suffix }}">{% translate 'Add review' %}</a>
+{% for review in reviews %}<article class="timeline-entry"><p class="eyebrow">{{ review.date|date:'Y-m-d' }} · {{ review.author.username }}</p><p>{% if review.score != None %}{{ review.score|floatformat:'-1' }}/5 ★{% else %}{% translate 'Unrated' %}{% endif %}</p>{{ review.notes|linebreaks }}<p class="muted">{% translate 'Recorded' %}: {{ review.created_at|date:'Y-m-d H:i' }}</p></article>{% empty %}<p>{% translate 'No reviews recorded.' %}</p>{% endfor %}</section>
 {% endblock %}

@@ -7,9 +7,11 @@
 <p>{% translate 'Create a wine profile in Wines first, then add its bottles here.' %}</p>
 <a class="button" href="{% url 'wine_create' %}">{% translate 'Add wine' %}</a>
 {% else %}
-<form method="post" data-preserve-form>{% csrf_token %}{{ form.as_p }}
+<form method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %} data-preserve-form>{% csrf_token %}{{ form.as_p }}
 <p class="draft-status muted" role="status" {% if not stale_draft %}hidden{% endif %}>
 {% if stale_draft %}{% translate 'Your unsaved input is based on older bottle details.' %}{% else %}{% translate 'Your unsaved input has been restored. Review it before saving.' %}{% endif %}
-<a href="{{ request.get_full_path }}" data-discard-draft>{% translate 'Discard unsaved input and reload' %}</a></p>
+<a href="{{ reload_url|default:request.get_full_path }}" data-discard-draft>{% translate 'Discard unsaved input and reload' %}</a></p>
 <button type="submit">{% translate 'Save' %}</button> <a class="button secondary" href="{{ back_url }}">{% translate 'Cancel' %}</a>
-</form>{% endif %}</section>{% endblock %}
+</form>{% endif %}
+{% if wine %}<h2>{% translate 'Reviews' %}</h2><p>{% translate 'Reviews are saved separately and preserve earlier scores and notes.' %}</p><a class="button secondary" href="{% url 'review_add' wine.pk %}{{ context_suffix }}">{% translate 'Add review' %}</a>{% endif %}
+</section>{% endblock %}

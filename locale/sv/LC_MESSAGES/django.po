@@ -381,3 +381,213 @@ msgstr "Vinet har flaskhistorik eller recensioner. Arkivera profilen? Tillgängl
 
 msgid "Choose a wine action."
 msgstr "Välj en åtgärd för vinet."
+
+msgid "Photo"
+msgstr "Foto"
+
+msgid "Remove user photo"
+msgstr "Ta bort eget foto"
+
+msgid "JPEG, PNG, WebP or HEIC. Up to 20 MB and 40 megapixels. Choose the photo again after a failed save."
+msgstr "JPEG, PNG, WebP eller HEIC. Högst 20 MB och 40 megapixlar. Välj fotot igen om det inte gick att spara."
+
+msgid "Choose a photo no larger than 20 MB."
+msgstr "Välj ett foto som är högst 20 MB."
+
+msgid "Use a JPEG, PNG, WebP or HEIC photo."
+msgstr "Använd ett foto i JPEG-, PNG-, WebP- eller HEIC-format."
+
+msgid "Choose a photo of at most 40 megapixels."
+msgstr "Välj ett foto med högst 40 megapixlar."
+
+msgid "Choose a still photo instead of an animation."
+msgstr "Välj ett stillbildsfoto i stället för en animation."
+
+msgid "The photo could not be read. Choose another photo or save without it."
+msgstr "Fotot kunde inte läsas. Välj ett annat foto eller spara utan det."
+
+msgid "The photo could not be saved. Choose it again, or save without a photo."
+msgstr "Fotot kunde inte sparas. Välj det igen eller spara utan foto."
+
+msgid "Store ID"
+msgstr "Butiks-ID"
+
+msgid "Store name"
+msgstr "Butiksnamn"
+
+msgid "Leading zeroes are preserved."
+msgstr "Inledande nollor bevaras."
+
+msgid "Review date"
+msgstr "Recensionsdatum"
+
+msgid "Score"
+msgstr "Betyg"
+
+msgid "Review notes"
+msgstr "Recensionsanteckningar"
+
+msgid "1–5 stars in half-star steps. A note can be saved without a score."
+msgstr "1–5 stjärnor i halva steg. Du kan spara en anteckning utan betyg."
+
+msgid "Choose 1–5 stars in half-star steps."
+msgstr "Välj 1–5 stjärnor i halva steg."
+
+msgid "Enter a score or a review note."
+msgstr "Ange ett betyg eller en recensionsanteckning."
+
+msgid "Removal reason"
+msgstr "Orsak till borttagning"
+
+msgid "Archive and leave bottles here"
+msgstr "Arkivera och lämna flaskorna här"
+
+msgid "Move available bottles and archive"
+msgstr "Flytta tillgängliga flaskor och arkivera"
+
+msgid "Move bottles to"
+msgstr "Flytta flaskorna till"
+
+msgid "Restore location"
+msgstr "Återställ plats"
+
+msgid "Move remaining bottles and keep archived"
+msgstr "Flytta återstående flaskor och behåll arkiveringen"
+
+msgid "Choose a non-consumption removal reason."
+msgstr "Välj en annan borttagningsorsak än konsumtion."
+
+msgid "That bottle is outside the selected location."
+msgstr "Flaskan finns inte på den valda platsen."
+
+msgid "Choose a location action."
+msgstr "Välj en åtgärd för platsen."
+
+msgid "Choose a different location."
+msgstr "Välj en annan plats."
+
+msgid "Search saved wines"
+msgstr "Sök bland sparade viner"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Clear search"
+msgstr "Rensa sökning"
+
+msgid "No wines match your search and filters. Clear the search or choose All locations."
+msgstr "Inga viner matchar sökningen och filtren. Rensa sökningen eller välj Alla platser."
+
+msgid "Clear search and filters"
+msgstr "Rensa sökning och filter"
+
+msgid "No wines match your search. Clear the search or change the archive filter."
+msgstr "Inga viner matchar sökningen. Rensa sökningen eller ändra arkivfiltret."
+
+msgid "Retail price"
+msgstr "Butikspris"
+
+msgid "Reviews"
+msgstr "Recensioner"
+
+msgid "Add review"
+msgstr "Lägg till recension"
+
+msgid "Recorded"
+msgstr "Registrerad"
+
+msgid "No reviews recorded."
+msgstr "Inga recensioner registrerade."
+
+msgid "Reviews are saved separately and preserve earlier scores and notes."
+msgstr "Recensioner sparas separat och bevarar tidigare betyg och anteckningar."
+
+msgid "Preferred Systembolaget store"
+msgstr "Favoritbutik på Systembolaget"
+
+msgid "Generate Markdown"
+msgstr "Skapa Markdown"
+
+msgid "Generate local snapshots for pairing discussions."
+msgstr "Skapa lokala sammanställningar för samtal om mat och vin."
+
+msgid "All wines, scores and notes"
+msgstr "Alla viner, betyg och anteckningar"
+
+msgid "Includes archived wines, empty profiles and every review."
+msgstr "Innehåller arkiverade viner, profiler utan flaskor och alla recensioner."
+
+msgid "Generate"
+msgstr "Skapa"
+
+msgid "Current bottles"
+msgstr "Aktuella flaskor"
+
+msgid "Location scope"
+msgstr "Platser i sammanställningen"
+
+msgid "Markdown preview"
+msgstr "Förhandsvisning av Markdown"
+
+msgid "Copy"
+msgstr "Kopiera"
+
+msgid "Copied."
+msgstr "Kopierat."
+
+msgid "Select and copy the text manually."
+msgstr "Markera och kopiera texten manuellt."
+
+msgid "The latest 100 matching operations."
+msgstr "De senaste 100 åtgärderna som matchar filtren."
+
+msgid "All wines"
+msgstr "Alla viner"
+
+msgid "All actions"
+msgstr "Alla åtgärder"
+
+msgid "Action"
+msgstr "Åtgärd"
+
+msgid "Clear filters"
+msgstr "Rensa filter"
+
+msgid "Review"
+msgstr "Recension"
+
+msgid "Location management"
+msgstr "Platshantering"
+
+msgid "Before"
+msgstr "Före"
+
+msgid "After"
+msgstr "Efter"
+
+msgid "No activity matches these filters."
+msgstr "Ingen aktivitet matchar filtren."
+
+msgid "Bottle removed. Its history is preserved."
+msgstr "Flaskan har tagits bort. Historiken bevaras."
+
+msgid "Remove bottle"
+msgstr "Ta bort flaska"
+
+msgid "Review saved."
+msgstr "Recensionen har sparats."
+
+msgid "Location updated. Bottle history is preserved."
+msgstr "Platsen har uppdaterats. Flaskhistoriken bevaras."
+
+msgid "Manage location"
+msgstr "Hantera plats"
+
+msgid "Preferred store saved."
+msgstr "Favoritbutiken har sparats."
+
+msgid "User photo"
+msgstr "Eget foto"
+
+msgid "Imported image"
+msgstr "Importerat foto"

@@ -18,7 +18,8 @@ def main():
         host="0.0.0.0",
         port=8000,
         threads=4,
-        max_request_body_size=2 * 1024 * 1024,
+        # Allow a supported 20 MB photo plus multipart and ordinary form fields.
+        max_request_body_size=22 * 1024 * 1024,
         # The listener is private to Caddy's Docker network. Trust only the scheme header.
         trusted_proxy="*",
         trusted_proxy_headers={"x-forwarded-proto"},

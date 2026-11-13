@@ -1,8 +1,17 @@
 {% extends 'base.html' %}{% load i18n %}
 {% block content %}<h1>{% translate 'Settings' %}</h1>
 <section class="form-panel"><h2>{% translate 'Locations' %}</h2>
-<ul class="location-list">{% for location in locations %}<li><span>{{ location.name }}{% if location.archived %} · {% translate 'Archived' %}{% endif %}</span><a href="{% url 'location_edit' location.pk %}">{% translate 'Rename' %}</a></li>{% empty %}<li>{% translate 'Bottles without a location are Unassigned.' %}</li>{% endfor %}</ul>
-<h3>{% translate 'Add location' %}</h3><form method="post" data-preserve-form>{% csrf_token %}{{ form.as_p }}<button type="submit">{% translate 'Save' %}</button></form></section>
+<ul class="location-list">{% for location in locations %}<li><span>{{ location.name }}{% if location.archived %} · {% translate 'Archived' %}{% endif %}</span><div><a href="{% url 'location_edit' location.pk %}">{% translate 'Rename' %}</a> · <a href="{% url 'location_retire' location.pk %}">{% translate 'Manage location' %}</a></div></li>{% empty %}<li>{% translate 'Bottles without a location are Unassigned.' %}</li>{% endfor %}</ul>
+<h3>{% translate 'Add location' %}</h3><form method="post" action="{% url 'settings' %}" data-preserve-form>{% csrf_token %}{{ form.as_p }}<button type="submit">{% translate 'Save' %}</button></form></section>
+<section class="form-panel"><h2>{% translate 'Preferred Systembolaget store' %}</h2><form method="post" action="{% url 'store_save' %}" data-preserve-form>{% csrf_token %}{{ store_form.as_p }}<button type="submit">{% translate 'Save' %}</button></form></section>
+<h2>{% translate 'Generate Markdown' %}</h2><p class="muted">{% translate 'Generate local snapshots for pairing discussions.' %}</p>
+<section class="form-panel" id="export-wines"><h3>{% translate 'All wines, scores and notes' %}</h3><p>{% translate 'Includes archived wines, empty profiles and every review.' %}</p>
+<form method="post" action="{% url 'markdown_generate' 'wines' %}" hx-post="{% url 'markdown_generate' 'wines' %}" hx-target="#export-wines" hx-select="#export-wines" hx-swap="outerHTML">{% csrf_token %}<button type="submit">{% translate 'Generate' %}</button></form>
+{% if wines_markdown %}{% include 'cellar/markdown_preview.html' with markdown=wines_markdown output_id='markdown-wines' %}{% endif %}</section>
+<section class="form-panel" id="export-bottles"><h3>{% translate 'Current bottles' %}</h3>
+<form method="post" action="{% url 'markdown_generate' 'bottles' %}" hx-post="{% url 'markdown_generate' 'bottles' %}" hx-target="#export-bottles" hx-select="#export-bottles" hx-swap="outerHTML">{% csrf_token %}<label for="export-location">{% translate 'Location scope' %}</label>
+<select name="location" id="export-location"><option value="all">{% translate 'All locations' %}</option><option value="unassigned" {% if export_scope == 'unassigned' %}selected{% endif %}>{% translate 'Unassigned' %}</option>{% for location in export_locations %}<option value="{{ location.pk }}" {% if export_scope == location.pk|stringformat:'s' %}selected{% endif %}>{{ location.name }}{% if location.archived %} · {% translate 'Archived' %}{% endif %}</option>{% endfor %}</select><button type="submit">{% translate 'Generate' %}</button></form>
+{% if bottles_markdown %}{% include 'cellar/markdown_preview.html' with markdown=bottles_markdown output_id='markdown-bottles' %}{% endif %}</section>
 <section class="form-panel"><h2>{% translate 'Account' %}</h2><p>{{ user.username }}</p><a class="button secondary" href="{% url 'password_change' %}">{% translate 'Change password' %}</a>
 <form method="post" action="{% url 'logout' %}" class="inline-form">{% csrf_token %}<button class="secondary" type="submit">{% translate 'Sign out' %}</button></form></section>
 {% endblock %}

@@ -13,7 +13,7 @@ class CellarLoginRequiredMiddleware(LoginRequiredMiddleware):
                 next_url = reverse("cellar")
                 if request.GET:
                     next_url += "?" + request.GET.urlencode()
-            elif request.resolver_match.url_name == "logout":
+            elif request.resolver_match.url_name in {"logout", "store_save", "markdown_generate"}:
                 next_url = reverse("settings")
             login_url = reverse("login") + "?" + urlencode({"next": next_url})
             # Values remain readable even without JavaScript. Passwords and tokens are excluded.

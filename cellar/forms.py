@@ -5,10 +5,24 @@ from django import forms
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
+from core.models import CellarSettings
+
 from .models import Bottle, InventoryEvent, Location, Review, Wine
 
 
 class WineForm(forms.ModelForm):
+    photo = forms.FileField(
+        label=_("Photo"),
+        required=False,
+        widget=forms.FileInput(
+            attrs={"accept": "image/jpeg,image/png,image/webp,image/heic,image/heif"}
+        ),
+        help_text=_(
+            "JPEG, PNG, WebP or HEIC. Up to 20 MB and 40 megapixels. "
+            "Choose the photo again after a failed save."
+        ),
+    )
+    remove_photo = forms.BooleanField(label=_("Remove user photo"), required=False)
     grapes_text = forms.CharField(
         label=_("Grapes (comma-separated)"), required=False, max_length=1000
     )
@@ -25,6 +39,8 @@ class WineForm(forms.ModelForm):
             "volume_ml",
             "article_number",
             "notes",
+            "photo",
+            "remove_photo",
         ]
         widgets = {"notes": forms.Textarea(attrs={"rows": 4})}
 
@@ -35,6 +51,12 @@ class WineForm(forms.ModelForm):
     def clean_article_number(self):
         return self.cleaned_data["article_number"] or None
 
+    def clean_photo(self):
+        from .images import prepare_image
+
+        upload = self.cleaned_data["photo"]
+        return prepare_image(upload) if upload else None
+
     def save(self, commit=True):
         self.instance.grapes = [
             value.strip() for value in self.cleaned_data["grapes_text"].split(",") if value.strip()
@@ -43,9 +65,11 @@ class WineForm(forms.ModelForm):
         if commit:
             if instance.pk:
                 # A profile edit must not undo a concurrent archive or overwrite provider context.
-                fields = [field for field in self.Meta.fields if field != "grapes_text"] + [
-                    "grapes"
-                ]
+                fields = [
+                    field
+                    for field in self.Meta.fields
+                    if field not in {"grapes_text", "photo", "remove_photo"}
+                ] + ["grapes"]
                 instance.save(update_fields=fields)
             else:
                 instance.save()
@@ -216,8 +240,23 @@ class RetireLocationForm(forms.Form):
         self.fields["target"].queryset = Location.objects.filter(archived=False).exclude(
             pk=location.pk
         )
+        if self.is_bound:
+            # Let committed retries through even when the destination was later archived.
+            self.fields["target"].queryset = Location.objects.exclude(pk=location.pk)
         if location.archived:
             self.fields["action"].choices = [
                 ("restore", _("Restore location")),
                 ("reassign", _("Move remaining bottles and keep archived")),
             ]
+        if self.is_bound:
+            self.fields["action"].choices = [
+                ("archive", _("Archive and leave bottles here")),
+                ("reassign", _("Move available bottles and archive")),
+                ("restore", _("Restore location")),
+            ]
+
+
+class StoreForm(forms.ModelForm):
+    class Meta:
+        model = CellarSettings
+        fields = ["store_id", "store_name"]

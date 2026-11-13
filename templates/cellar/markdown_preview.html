@@ -1,0 +1,5 @@
+{% load i18n %}
+<label for="{{ output_id }}">{% translate 'Markdown preview' %}</label>
+<textarea id="{{ output_id }}" class="markdown-preview" rows="12" readonly spellcheck="false">{{ markdown }}</textarea>
+<button type="button" class="secondary" data-copy="{{ output_id }}">{% translate 'Copy' %}</button>
+<p role="status" class="muted" data-copy-status data-copied="{% translate 'Copied.' %}" data-copy-failed="{% translate 'Select and copy the text manually.' %}"></p>

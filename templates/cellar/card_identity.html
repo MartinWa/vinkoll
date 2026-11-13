@@ -1,8 +1,8 @@
 {% load i18n %}
-<div class="wine-art" aria-hidden="true"><span class="bottle-shape"><span class="bottle-label">V</span></span></div>
+<div class="wine-art" aria-hidden="true">{% if wine.image_id %}<img src="{% url 'wine_image' wine.image_id 'thumbnail' %}" alt="" loading="lazy" data-wine-photo>{% endif %}<span class="bottle-shape" {% if wine.image_id %}hidden{% endif %}><span class="bottle-label">V</span></span></div>
 <span class="type-banner type-{{ wine.wine_type }}">{{ wine.get_wine_type_display }}</span>
 <div class="card-info">
-<h2><a href="{% url 'wine_detail' wine.pk %}?location={{ scope|default:'all' }}">{{ wine.name }}</a></h2><p class="muted">{{ wine.producer|default:'—' }} · {{ wine.volume_ml }} ml</p>
-<p class="card-meta">{% translate 'Unrated' %} <span>·</span> {% if wine.retail_price != None %}{{ wine.retail_price }} kr{% else %}{% translate 'Price unknown' %}{% endif %}</p>
+<h2><a href="{% url 'wine_detail' wine.pk %}{{ context_suffix }}">{{ wine.name }}</a></h2><p class="muted">{{ wine.producer|default:'—' }} · {{ wine.volume_ml }} ml</p>
+<p class="card-meta">{% if wine.latest_score != None %}{{ wine.latest_score|floatformat:'-1' }}/5 ★{% else %}{% translate 'Unrated' %}{% endif %} <span>·</span> {% if wine.retail_price != None %}{{ wine.retail_price }} kr{% else %}{% translate 'Price unknown' %}{% endif %}</p>
 {% if wine.product_url %}<a class="retailer-link" href="{{ wine.product_url }}" target="_blank" rel="noopener noreferrer">Systembolaget ↗</a>{% endif %}
 </div>

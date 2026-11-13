@@ -3,4 +3,4 @@
 {% if wine.archived %}<p>{% translate 'Restore this wine to the active catalogue?' %}</p>
 {% elif used %}<p>{% translate 'This wine has bottle or review history. Archive its profile? Available bottles remain in Cellar.' %}</p>
 {% else %}<p>{% translate 'Permanently delete this unused wine profile?' %}</p>{% endif %}
-<form method="post">{% csrf_token %}<input type="hidden" name="action" value="{{ action }}"><button type="submit">{% translate 'Confirm' %}</button> <a class="button secondary" href="{% url 'wines' %}">{% translate 'Cancel' %}</a></form></section>{% endblock %}
+<form method="post">{% csrf_token %}<input type="hidden" name="action" value="{{ action }}"><button type="submit">{% translate 'Confirm' %}</button> <a class="button secondary" href="{{ back_url }}">{% translate 'Cancel' %}</a></form></section>{% endblock %}

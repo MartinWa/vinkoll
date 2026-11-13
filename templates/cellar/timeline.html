@@ -1,10 +1,15 @@
 {% extends 'base.html' %}{% load i18n %}
-{% block content %}<h1>{% translate 'Timeline' %}</h1><p class="muted">{% translate 'The latest 100 inventory operations.' %}</p>
+{% block content %}<h1>{% translate 'Timeline' %}</h1><p class="muted">{% translate 'The latest 100 matching operations.' %}</p>
+<form method="get" class="search-form"><div><label for="wine-filter">{% translate 'Wine' %}</label><select id="wine-filter" name="wine"><option value="">{% translate 'All wines' %}</option>{% for wine in wines %}<option value="{{ wine.pk }}" {% if wine_filter == wine.pk|stringformat:'s' %}selected{% endif %}>{{ wine.name }}</option>{% endfor %}</select></div>
+<div><label for="action-filter">{% translate 'Action' %}</label><select id="action-filter" name="action"><option value="">{% translate 'All actions' %}</option>{% for value, label in actions %}<option value="{{ value }}" {% if action_filter == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></div><button type="submit">{% translate 'Filter' %}</button><a class="button secondary" href="{% url 'timeline' %}">{% translate 'Clear filters' %}</a></form>
 <div class="timeline">{% for operation in operations %}<article class="timeline-entry">
 <p class="eyebrow">{{ operation.created_at|date:'Y-m-d H:i' }} · {{ operation.actor.username }}</p>
-{% with event=operation.events.first %}<h2>{{ event.get_reason_display }} · {{ event.current.wine_name }}</h2>{% endwith %}
+{% if operation.kind == 'review' %}{% with review=operation.review %}<h2>{% translate 'Review' %} · <a href="{% url 'wine_detail' review.wine_id %}">{{ review.wine.name }}</a></h2><p>{{ review.date|date:'Y-m-d' }} · {% if review.score != None %}{{ review.score|floatformat:'-1' }}/5 ★{% else %}{% translate 'Unrated' %}{% endif %}</p>{{ review.notes|linebreaks }}{% endwith %}
+{% else %}
+{% with event=operation.events.all.0 %}<h2>{% if event %}{{ event.get_reason_display }} · {{ event.current.wine_name }}{% else %}{% translate 'Location management' %}{% endif %}</h2>{% endwith %}
 <details><summary>{{ operation.events.count }} {% translate 'recorded changes' %}</summary>
-{% for event in operation.events.all %}<p>{{ event.get_reason_display }} · {% translate 'Bottle' %} #{{ event.bottle_id }}</p>
-<p class="muted">{% if event.previous %}{{ event.previous.vintage_year|default:event.previous.vintage_kind }} · {{ event.previous.location_name|default:'—' }} → {% endif %}{{ event.current.vintage_year|default:event.current.vintage_kind }} · {{ event.current.location_name|default:'—' }}</p>{% endfor %}
-</details></article>{% empty %}<section class="empty-state"><p>{% translate 'Your cellar history starts when you add bottles.' %}</p></section>{% endfor %}</div>
+{% for event in operation.events.all %}<p>{{ event.get_reason_display }} · <a href="{% url 'wine_detail' event.bottle.wine_id %}">{% translate 'Bottle' %} #{{ event.bottle_id }}</a></p>
+{% if event.previous %}<p class="muted">{% translate 'Before' %}: {% include 'cellar/event_values.html' with values=event.previous %}</p>{% endif %}
+<p class="muted">{% translate 'After' %}: {% include 'cellar/event_values.html' with values=event.current %}</p>{% endfor %}
+</details>{% endif %}</article>{% empty %}<section class="empty-state"><p>{% translate 'No activity matches these filters.' %}</p></section>{% endfor %}</div>
 {% endblock %}
