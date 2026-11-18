@@ -1,0 +1,13 @@
+Vinkoll — shared, self-hosted wine cellar.
+
+Copyright 2026 Vinkoll contributors
+
+Required Notice: Copyright 2026 Vinkoll contributors
+
+This project is licensed under the PolyForm Noncommercial License 1.0.0. The
+complete, unmodified license text is in LICENSE; this notice does not add or
+change any permission.
+
+Separately licensed dependencies retain their own terms. See `static/vendor/`
+for the pinned, locally served HTMX license and the license files shipped with
+the installed Python distributions.

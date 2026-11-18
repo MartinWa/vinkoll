@@ -1,0 +1,15 @@
+# Vinkoll — project-local Vibe configuration.
+#
+# Toolchain: Python 3.14 / Django 5.2, ruff (lint + format), pytest, uv, and a
+# Linux dev container driven by Docker Desktop on Windows (compose.development.yaml).
+#
+# All project workflows — lint, format check, migration check, tests — run
+# through `docker compose ... exec`, so `docker` covers the linter and test
+# runner as well as the container runner. Interpreters and arbitrary-code
+# entry points (python, uv run, node, eval) are deliberately NOT allowlisted.
+
+[tools.git_bash]
+allowlist = [
+    "git",   # vcs: status, diff, log, commits
+    "docker", # container runner: compose exec runs ruff / pytest / manage.py
+]
