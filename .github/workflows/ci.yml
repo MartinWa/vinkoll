@@ -21,7 +21,7 @@ concurrency:
 
 env:
   # Keep aligned with the uv-bin digest in the Dockerfile.
-  UV_VERSION: "0.13.7"
+  UV_VERSION: "0.13.9"
   DOCKER_BUILD_RECORD_UPLOAD: "false"
 
 jobs:
