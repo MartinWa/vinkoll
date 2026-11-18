@@ -6,7 +6,7 @@ async page => {
   await page.goto(baseUrl + '/');
   if (await page.locator('#id_username').count()) {
     await page.locator('#id_username').fill('demo');
-    await page.locator('#id_password').fill('demo-vinkoll-local');
+    await page.locator('#id_password').fill('demo');
     await page.getByRole('button', {name: 'Logga in', exact: true}).click();
   }
   await page.setViewportSize({width: 390, height: 844});
@@ -39,7 +39,7 @@ async page => {
   await page.getByRole('heading', {name: 'Logga in igen'}).waitFor();
   await page.getByRole('link', {name: 'Logga in', exact: true}).click();
   await page.locator('#id_username').fill('demo');
-  await page.locator('#id_password').fill('demo-vinkoll-local');
+  await page.locator('#id_password').fill('demo');
   await page.getByRole('button', {name: 'Logga in', exact: true}).click();
   assert(await page.locator('#id_quantity').inputValue() === '2', 'Expired form lost quantity');
   assert(await page.locator('#id_purchase_price').inputValue() === '0', 'Expired form lost zero price');

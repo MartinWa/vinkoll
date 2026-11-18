@@ -38,7 +38,7 @@ To try the application with sample data:
 docker compose -f compose.development.yaml exec vinkoll python manage.py seed_demo
 ```
 
-Sign in with `demo` / `demo-vinkoll-local`. This optional command is available only in development and creates three example wines and six bottles.
+Sign in with `demo` / `demo`. This optional command is available only in development and creates three example wines and six bottles. Running it again resets the demo account to these credentials.
 
 ## Using Vinkoll
 

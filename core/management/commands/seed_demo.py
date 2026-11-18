@@ -15,10 +15,11 @@ class Command(BaseCommand):
     def handle(self, **options):
         if not settings.DEBUG:
             raise CommandError("Demo records are only permitted with development settings.")
-        actor, created = get_user_model().objects.get_or_create(username="demo")
-        if created:
-            actor.set_password("demo-vinkoll-local")
-            actor.save()
+        actor, _ = get_user_model().objects.get_or_create(username="demo")
+        if not actor.check_password("demo") or not actor.is_active:
+            actor.set_password("demo")
+            actor.is_active = True
+            actor.save(update_fields=["password", "is_active"])
         location, _ = Location.objects.get_or_create(name="Vinställ")
         examples = [
             ("Exempel · Pinot noir", "red", "Frankrike", "Pinot noir", 2021, 3),
@@ -45,6 +46,4 @@ class Command(BaseCommand):
                 vintage_year=year,
                 purchase_price=Decimal("149.00"),
             )
-        self.stdout.write(
-            "Synthetic demo ready. Account: demo / demo-vinkoll-local (development only)."
-        )
+        self.stdout.write("Synthetic demo ready. Account: demo / demo (development only).")

@@ -21,7 +21,7 @@ async page => {
   await page.goto(base + '/');
   if (await page.locator('#id_username').count()) {
     await page.locator('#id_username').fill('demo');
-    await page.locator('#id_password').fill('demo-vinkoll-local');
+    await page.locator('#id_password').fill('demo');
     await page.getByRole('button', {name: 'Logga in', exact: true}).click();
   }
   await page.goto(base + '/wines/add/');
@@ -139,7 +139,7 @@ async page => {
   await page.getByRole('heading', {name: 'Logga in igen'}).waitFor();
   await page.getByRole('link', {name: 'Logga in', exact: true}).click();
   await page.locator('#id_username').fill('demo');
-  await page.locator('#id_password').fill('demo-vinkoll-local');
+  await page.locator('#id_password').fill('demo');
   await page.getByRole('button', {name: 'Logga in', exact: true}).click();
   assert(new URL(page.url()).pathname === '/settings/', 'Expired export returned to a POST-only route');
   await page.goto(base + '/timeline/?wine=' + wineId);
