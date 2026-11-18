@@ -93,7 +93,7 @@ def main(image):
                 try:
                     if request("/healthz/")[0] == 200:
                         return container, request
-                except (urllib.error.URLError, ConnectionError):
+                except urllib.error.URLError, ConnectionError:
                     pass
                 time.sleep(0.25)
             raise RuntimeError(docker("logs", container))

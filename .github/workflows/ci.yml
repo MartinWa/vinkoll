@@ -118,4 +118,6 @@ jobs:
           cache-to: type=gha,scope=ci-production,mode=max
           github-token: ""
       - name: Run the production HTTP and persistence smoke test
-        run: python tools/smoke.py vinkoll:ci
+        # tools/ files use the Python 3.14 PEP 758 except syntax that the
+        # formatter enforces; the runner's default Python is older.
+        run: uv run --no-project --python 3.14.10 python tools/smoke.py vinkoll:ci

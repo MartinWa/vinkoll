@@ -5,6 +5,17 @@ uploaded wine photos. Scheduled, verified backups are planned; the supported
 procedure below is manual. Verify a backup can be restored on a clean instance
 before entering real cellar data.
 
+Production commands use the `.env` values configured for deployment. Load them
+into the shell first — Compose reads `.env` itself, but `tar` does not:
+
+```sh
+cd /path/to/vinkoll
+set -a && . ./.env && set +a
+```
+
+If the variables are managed another way, substitute the actual data-directory
+path for `$APP_DATA_PATH` in the commands below.
+
 ## What to back up
 
 - The contents of the configured data directory (`APP_DATA_PATH` in production,
@@ -15,34 +26,39 @@ before entering real cellar data.
 - The `.env` deployment configuration, kept outside the data directory and
   protected separately.
 
-## Back up
+## Back up (production)
 
-Stop the application first so the SQLite database is closed and the snapshot is
-consistent, then copy the data directory:
+Stop the application so the SQLite database is closed and the snapshot is
+consistent, archive the *contents* of the data directory, and start again:
 
 ```sh
 docker compose down
-tar -czf vinkoll-data-$(date -u +%Y%m%d-%H%M%S).tar.gz "$APP_DATA_PATH"
+tar -czf "vinkoll-data-$(date -u +%Y%m%d-%H%M%S).tar.gz" -C "$APP_DATA_PATH" .
 docker compose up -d
-```
-
-For the development container, stop and copy the volume contents instead, or
-back up the volume with a one-off container:
-
-```sh
-docker compose -f compose.development.yaml down
-docker run --rm --volume vinkoll-development-data:/data --volume "$PWD:/backup" \
-  alpine tar -czf /backup/development-data.tar.gz -C /data .
 ```
 
 Do not back up a live SQLite database by copying its database file during
 active use.
 
+## Back up (development)
+
+The volume is owned by the Compose project, so let Compose resolve its name
+and read it through a one-off service container. Stop the development stack
+first:
+
+```sh
+docker compose -f compose.development.yaml down
+docker compose -f compose.development.yaml run --rm \
+  --volume "$PWD:/backup" vinkoll \
+  tar -czf /backup/development-data.tar.gz -C /data .
+```
+
 ## Verify a backup
 
-Restore the backup into a clean data directory and known image tag, start the
-container, sign in, and confirm the catalogue, bottle counts, history and photos
-are present:
+Restore the archive into a clean data directory and run the matching image tag,
+start the container, sign in, and confirm the catalogue, bottle counts, history
+and photos are present. The archive stores the data-directory contents, so it
+extracts into the data directory as-is:
 
 ```sh
 tar -xzf vinkoll-data-YYYYMMDD-HHMMSS.tar.gz -C "$APP_DATA_PATH"
@@ -51,9 +67,18 @@ docker compose up -d
 
 ## Restore to the running installation
 
-Stop the application, replace the data directory contents with the verified
-backup, and restart with the retained image tag or digest. Migrations only run
-forward; restore with the matching image rather than downgrading.
+Stop the application, clear the data directory, extract the verified backup, and
+restart with the retained image tag or digest:
+
+```sh
+docker compose down
+find "$APP_DATA_PATH" -mindepth 1 -delete
+tar -xzf vinkoll-data-YYYYMMDD-HHMMSS.tar.gz -C "$APP_DATA_PATH"
+docker compose up -d
+```
+
+Migrations only run forward; restore with the matching image rather than
+downgrading.
 
 ## Retention
 

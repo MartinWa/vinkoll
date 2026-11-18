@@ -58,6 +58,10 @@ docker build --target production -t vinkoll:local .
 python tools/smoke.py vinkoll:local
 ```
 
+`tools/smoke.py` uses the Python 3.14 syntax the formatter enforces; run it with
+Python 3.14 (`uv run --no-project --python 3.14.10 python tools/smoke.py …` if
+the host default is older). CI pins the same interpreter.
+
 The smoke test checks HTTP authentication, CSRF, inventory retries, private
 photos, reviews, store settings, Markdown and persistence across container
 replacement.
