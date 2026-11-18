@@ -38,7 +38,7 @@ def fetch(url, key=None):
             }
     except urllib.error.HTTPError as exc:
         return {"status": exc.code, "elapsed": round(time.monotonic() - start, 2)}
-    except urllib.error.URLError, TimeoutError:
+    except (urllib.error.URLError, TimeoutError):
         return {"status": "unavailable", "elapsed": round(time.monotonic() - start, 2)}
 
 
@@ -69,7 +69,7 @@ def json_result(url, key=None):
             if not isinstance(data, dict):
                 raise ValueError("Expected an object response.")
             result["data"] = data
-        except ValueError, UnicodeDecodeError:
+        except (ValueError, UnicodeDecodeError):
             result["status"] = "malformed_json"
     return result
 
