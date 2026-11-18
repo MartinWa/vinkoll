@@ -1,0 +1,43 @@
+version: 2
+updates:
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    # Let a release age before opening a version-update PR. Security updates
+    # are not delayed by cooldown.
+    cooldown:
+      default-days: 7
+    allow:
+      - dependency-type: all
+    ignore:
+      # Stay on Django 5.2 LTS; larger upgrades require an explicit review.
+      - dependency-name: django
+        versions: [">=5.3"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 1
+    # Base-image rebuilds carry Debian fixes; consider them without a cooldown.
+    cooldown:
+      exclude: ["python"]
+    ignore:
+      # Keep the Python series aligned with requires-python and the uv-bin Dockerfile stage.
+      - dependency-name: python
+        update-types: [version-update:semver-major, version-update:semver-minor]

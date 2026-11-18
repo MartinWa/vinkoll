@@ -1,0 +1,11 @@
+# Vinkoll — project-local Vibe hooks.
+# Runs after each agent turn (main agent and subagents whose edits this
+# session inherits). Lints the Python files the turn touched and denies the
+# finish when ruff reports findings, so the agent fixes them first.
+
+[[hooks]]
+name = "lint-changed"
+type = "post_agent"
+command = "bash .vibe/hooks/lint-changed.sh"
+timeout = 120.0
+description = "Ruff lint + format check on changed Python files (dev container, .venv fallback)"
